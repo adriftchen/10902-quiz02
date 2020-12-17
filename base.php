@@ -3,6 +3,32 @@ date_default_timezone_set("Asia/Taipei");
 session_start();
 
 
+$Total=new DB('total');
+
+$chk=$Total->find(['date'=>date("Y-m-d")]);
+
+if(empty($chk) && empty($_SESSION['total'])){
+    //沒有今天的資料,也沒有session  今天頭香 需要新增今日資料,
+    $Total->save(["date"=>date("Y-m-d"),"total"=>1]);
+    $_SESSION['total']=1;
+
+}else if(empty($chk) && !empty($_SESSION['total'])){
+    //沒有今天的資料,但是有session 異常情形..需要新增今日資料
+    $Total->save(["date"=>date("Y-m-d"),"total"=>1]);
+
+}else if(!empty($chk) && empty($_SESSION['total'])){
+    //有今天的資料,沒有session  表示是新來 需要加1
+    $chk['total']++;
+    $Total->save($chk);
+    $_SESSION['total']=1;
+
+}
+
+
+
+
+
+
 class DB{
     protected $dsn="mysql:host=localhost;dbname=db25;charset=utf8";
     protected $table="";
