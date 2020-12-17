@@ -30,26 +30,15 @@
                	                 </div>
             <div class="hal" id="main">
             	<div>
-            		
-                	<span style="width:80%; display:inline-block;">
+            		            		
+				<span style="width:80%; display:inline-block;">
 						<marquee>請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章</marquee>
                     </span>
                 	<span style="width:18%; display:inline-block;">
-						<a href="?do=login">會員登入</a>
-                    </span>
+                    	                    	<a href="?do=login">會員登入</a>
+                    	                    </span>
                     	<div class="">
-						<?php
-							$do=(isset($_GET['do']))?$_GET['do']:"main";
-							$file="front/".$do.".php";
-							if(file_exists($file)){
-								include_once $file;
-							}else{
-								include_once "front/main.php";
-
-							}
-
-						?>
-						</div>
+                		                        </div>
                 </div>
             </div>
         </div>
