@@ -5,7 +5,7 @@ session_start();
 
 $Total=new DB('total');
 $Mem=new DB("mem");
-
+$News=new DB("news");
 
 
 $chk=$Total->find(['date'=>date("Y-m-d")]);
@@ -125,7 +125,7 @@ class DB{
             $sql="insert into $this->table (`".implode("`,`",array_keys($arg))."`) values('".implode("','",$arg)."')";
 
         }
-
+       
         return $this->pdo->exec($sql);
     }
     function q($sql){
