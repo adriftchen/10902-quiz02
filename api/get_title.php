@@ -5,9 +5,16 @@ $type=$_GET['type'];
 
 $news=$News->all(['type'=>$type]);
 
+
+$result=[];
+
+
 foreach($news as $n){
-    echo "<a href='javascript:getNews({$n['id']})' style='display:block'>{$n['title']}</a>";
+    $result[]=[
+        'title'=>$n['title'],
+        'id'=>$n['id']
+    ];
 }
 
-
+echo json_encode($result);
 ?>
