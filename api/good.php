@@ -1,12 +1,33 @@
 <?php
 include_once "../base.php";
 
+$news=$_POST['id'];
+$chk=$Log->count(['news'=>$news,'acc'=>$_SESSION['login']]);
+if($chk>0){
+    $Log->del([
+        'acc'=>$_SESSION['login'],
+        'news'=>$news
+    ]);
+
+    $post=$News->find($news);
+    $post['good']--;
+    $News->save($post);
+}else{
+    $Log->save([
+        'acc'=>$_SESSION['login'],
+        'news'=>$news
+    ]);
+
+    $post=$News->find($news);
+    $post['good']++;
+    $News->save($post);
+}
 
 /* $_POST['type'];
 $_POST['acc'];
 $_POST['news']; */
 
-switch($_POST['type']){
+/* switch($_POST['type']){
     case "1":
 
         $Log->save([
@@ -28,7 +49,7 @@ switch($_POST['type']){
         $news['good']--;
         $News->save($news);
     break;
-}
+} */
 
 
 ?>

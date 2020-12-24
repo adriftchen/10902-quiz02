@@ -30,11 +30,11 @@
                     if($chk){
             ?>
 
-                     <a href='#' id="news<?=$news['id'];?>" onclick="good('<?=$news['id'];?>','<?=$_SESSION['login'];?>','2')">收回讚</a>
+                     <a href='#' class="gg" id="news<?=$news['id'];?>">收回讚</a>
             <?php
                     }else{
                 ?>
-                    <a href='#' id="news<?=$news['id'];?>" onclick="good('<?=$news['id'];?>','<?=$_SESSION['login'];?>','1')">讚</a>
+                    <a href='#' class="gg" id="news<?=$news['id'];?>">讚</a>
                 <?php
                     }
                 }
@@ -73,5 +73,16 @@ $(".header").on("click",function(){
 
 })
 
+$(".gg").on("click",function(){
+    let id=$(this).attr('id').replace("news","")
+    let text=$(this).text();
+    if(text=='讚'){
+        $(this).text('收回讚')
+    }else{
+        $(this).text('讚')
+    }
+    $.post("api/good.php",{id})
+
+})
 
 </script>
